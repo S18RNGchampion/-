@@ -1,4 +1,4 @@
-// engines.stopAll()
+/ engines.stopAll()
 auto("fast");
 setScreenMetrics(720,1280)
 let number01=0      // 读选文章分数
@@ -25,10 +25,11 @@ if(text("学习报表").exists()){       //若在"我的"界面，返回主界�
     back()
     sleep(1000)
 }
-console.log("正在进入'我的'界面")
+console.log("请等待...")
 while(true){
     if(id("comm_head_xuexi_mine").exists()){
     id("comm_head_xuexi_mine").findOne().click()
+    console.log("已进入'我的'界面")
     break;
     }
 }
@@ -89,14 +90,18 @@ while(true){
 }
 className("android.view.ViewGroup").depth(15).findOnce(2).child(1).click() //点击要闻 
 sleep(3000)
-let turns=1
+let turns01=1
 readjs()
 function readjs(){
-for(;turns<7;turns++){ 
+for(;turns01<7;turns01++){ 
+   
+    if(turns01==5){
+        swipe(random(480,600),random(1100,1170),random(480,600),random(400,450),2000)
+    }
     className("android.widget.ListView").depth(21).findOnce(1).
-    child(turns).click() //点击要闻文章第n篇   
-    console.log("正在阅读第"+turns+"篇")
-    for(let i=0;i<3;i++){
+    child(turns01).click() //点击要闻文章第n篇   
+    console.log("正在阅读第"+turns01+"篇")
+    for(let i=0;i<4;i++){
         start_x1=random(525,651)
         start_y1=random(1050,1130)
         end_x1=random(525,651)
@@ -105,7 +110,7 @@ for(;turns<7;turns++){
         swipe(start_x1,start_y1,end_x1,end_y1,duration1)
         sleep(random(700,800))    //下滑结束
     }
-    for(let i=0;i<3;i++){
+    for(let i=0;i<4;i++){
         start_x1=random(525,651)
         start_y1=random(540,620)
         end_x1=random(525,651)
@@ -114,34 +119,55 @@ for(;turns<7;turns++){
         swipe(start_x1,start_y1,end_x1,end_y1,duration1)
         sleep(random(700,800))  //上滑结束
     }
-    console.log("第"+turns+"篇结束！")
+    console.log("第"+turns01+"篇结束！")
 
-if(attitudenumber<=1){
-    text("欢迎发表你的观点").click()
-    sleep(1000)
-    let comment=["支持党，支持国家！", "为实现中华民族伟大复兴而不懈奋斗！", "不忘初心，牢记使命"]
-    setText(0,comment[random(0,2)])
-    sleep(1000)
-    click("发布")
-    console.log("评论成功！")
-    // sleep(3000)
-    // textContains("删除").waitFor();
-    // click("删除")
-    // sleep(2000)
-    // click("确认")
-    // console.log("删除成功")
-    attitudenumber=1
-    sleep(1000)
-    }
+    if(attitudenumber<1){
+        text("欢迎发表你的观点").click()
+        sleep(1000)
+        let comment=["支持党，支持国家！", "为实现中华民族伟大复兴而不懈奋斗！", "不忘初心，牢记使命"]
+        setText(0,comment[random(0,2)])
+        sleep(1000)
+        click("发布")
+        console.log("评论成功！")
+        // sleep(3000)
+        // textContains("删除").waitFor();
+        // click("删除")
+        // sleep(2000)
+        // click("确认")
+        // console.log("删除成功")
+        attitudenumber=1
+        sleep(1000)
+        }
     console.log("返回至要闻界面")
-    back()  
-    sleep(3000)
+    back()                //学习主页的要闻部分
+    sleep(1000)
     }
-    console.log("选读文章部分已结束！")
+    console.log("选读文章部分已结束！") 
 }
-
-
-
+// // engines.stopAll()
+// // console.show()
+console.log("进入百灵界面,开始视听学习部分")
+desc("百灵").findOne().click()
+sleep(2000);
+let turns02=1
+console.log("视频即将开始!")
+className("android.widget.FrameLayout").depth(24).findOne().click()
+for(;turns02<7;turns02++){
+    console.log("第"+turns02+"个视频正在进行...")
+    sleep(13000)
+    console.log("第"+turns02+"个视频已结束")
+    start_x1=random(480,600)
+    start_y1=random(1100,1170)
+    end_x1=random(480,600)
+    end_y1=random(100,200)
+    duration1=random(300,400)
+    if(turns02<6)
+    swipe(start_x1,start_y1,end_x1,end_y1,duration1)
+    sleep(random(700,800))    //下滑结束
+}
+console.log("视听学习部分已结束")
+console.log("回到视频主页")
+back()                   //百灵主页的推荐部分
 
 
 
